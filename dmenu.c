@@ -287,19 +287,21 @@ fuzzymatch(void)
 			itext_len = strlen(it->text);
 			pidx = 0; /* pointer */
 			sidx = eidx = -1; /* start of match, end of match */
+
 			/* walk through item text */
 			for (i = 0; i < itext_len && (c = it->text[i]); i++) {
-				/* fuzzy match pattern */
-				if (!fstrncmp(&text[pidx], &c, 1)) {
-					if(sidx == -1)
-						sidx = i;
-					pidx++;
-					if (pidx == text_len) {
-						eidx = i;
-						break;
-					}
+			  /* fuzzy match pattern */
+			  if (!fstrncmp(&text[pidx], &c, 1)) {
+				if(sidx == -1)
+				  sidx = i;
+				pidx++;
+				if (pidx == text_len) {
+				  eidx = i;
+				  break;
 				}
+			  }
 			}
+			
 			/* build list of matches */
 			if (eidx != -1) {
 				/* compute distance */
